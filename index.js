@@ -3,6 +3,7 @@ const path = require('path');
 const routesIndex = require('./routes');
 
 const app = express();
+app.use(express.static('public'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
 
