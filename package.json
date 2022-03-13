@@ -19,7 +19,9 @@
   "homepage": "https://github.com/francocsanchez/UpTask#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "pug": "^3.0.2"
+    "mysql2": "^2.3.3",
+    "pug": "^3.0.2",
+    "sequelize": "^6.17.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
