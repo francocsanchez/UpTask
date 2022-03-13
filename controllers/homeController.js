@@ -5,3 +5,7 @@ exports.index = (req, res) => {
 exports.newProyect = (req, res) => {
     res.render('./home/newProyect', { title: 'Nuevo Proyecto' })
 }
+
+exports.addProyect = (req,res)  => {
+    console.log(req.body);
+}

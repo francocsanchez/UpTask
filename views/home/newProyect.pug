@@ -3,8 +3,8 @@ extends ../layout
 block content
     .contenido-principal
         h1 #{title}
-
-        form.agregar-proyecto
+ 
+        form.agregar-proyecto(action="/newProyect" method="POST")
             .campo 
                 label(for="name") Nombre proyecto: 
                 input(type="text" id="name" name="name" placeholder="Nombre del proyecto")
