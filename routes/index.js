@@ -5,6 +5,7 @@ const homeController = require('../controllers/homeController');
 
 module.exports = function () {
     router.get('/', homeController.index)
+    router.get('/newProyect',homeController.newProyect)
 
     return router;
 }
