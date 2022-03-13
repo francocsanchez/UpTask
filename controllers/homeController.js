@@ -1,3 +1,5 @@
+const Proyect = require('../models/Proyect');
+
 exports.index = (req, res) => {
     res.render('./home/index', { title: 'Home' })
 }
@@ -6,7 +8,7 @@ exports.newProyect = (req, res) => {
     res.render('./home/newProyect', { title: 'Nuevo Proyecto' })
 }
 
-exports.addProyect = (req, res) => {
+exports.addProyect = async (req, res) => {
     const { name } = req.body
 
     let errors = [];
@@ -14,5 +16,8 @@ exports.addProyect = (req, res) => {
 
     if (errors.length > 0) {
         res.render('./home/newProyect', { title: 'Nuevo Proyecto', errors })
+    } else {
+        const proyect = await Proyect.create({ name });
+        res.redirect('/');
     }
 }
