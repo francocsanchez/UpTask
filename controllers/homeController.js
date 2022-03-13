@@ -1,7 +1,8 @@
 const Proyect = require('../models/Proyect');
 
-exports.index = (req, res) => {
-    res.render('./home/index', { title: 'Home' })
+exports.index = async(req, res) => {
+    const proyects = await Proyect.findAll();
+    res.render('./home/index', { title: 'Home' , proyects})
 }
 
 exports.newProyect = (req, res) => {

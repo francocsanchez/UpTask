@@ -20,10 +20,8 @@ html(lang="en")
                 .panel.lista-proyectos
                     h2 Proyectos 
                     ul#proyectos.proyectos
-                        li
-                            a(href="#") Proyecto 1
-                        li
-                            a(href="#") Proyecto 2
-                        li
-                            a(href="#") Proyecto 3  
+                        if(proyects.length)
+                            each proyect in proyects
+                                li
+                                    a(href=`${proyect.url}`) #{proyect.name}
             block content
