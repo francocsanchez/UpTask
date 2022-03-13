@@ -3,7 +3,11 @@ extends ../layout
 block content
     .contenido-principal
         h1 #{title}
- 
+
+        if errors 
+            each error in errors 
+                .alerta.error= error.texto
+
         form.agregar-proyecto(action="/newProyect" method="POST")
             .campo 
                 label(for="name") Nombre proyecto: 

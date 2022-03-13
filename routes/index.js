@@ -9,6 +9,6 @@ module.exports = function () {
     //Rutas de creacion de proyecto
     router.get('/newProyect', homeController.newProyect)
     router.post('/newProyect', homeController.addProyect)
-    
+
     return router;
 }
