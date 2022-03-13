@@ -3,6 +3,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const routesIndex = require('./routes');
 
+// Conexion DB - Generacion de Tablas
+const db = require('./config/db');
+
+require('./models/Proyect');
+
+db.sync()
+    .then(() => console.log('Conectado al servidor'))
+    .catch(error => console.log(error));
+
 const app = express();
 app.use(express.static('public'));
 app.set('view engine', 'pug');
