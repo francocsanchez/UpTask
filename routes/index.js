@@ -15,6 +15,7 @@ module.exports = function () {
     router.post('/newProyect', validation, homeController.addProyect)
     router.get('/proyects/:url', homeController.showProyect)
     router.get('/proyect/:id/edit', homeController.editProyect)
+    router.post('/newProyect/:id', validation, homeController.updateProyect)
 
     return router;
 }

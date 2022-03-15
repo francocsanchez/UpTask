@@ -39,3 +39,18 @@ exports.editProyect = async (req, res) => {
     const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
     res.render('./home/newProyect', { title: 'Editar proyecto', proyects, proyect })
 }
+
+exports.updateProyect = async (req, res) => {
+    const proyects = await Proyect.findAll();
+    const { name } = req.body
+
+    let errors = [];
+    if (!name) { errors.push({ 'texto': 'Agregar un nombre' }) }
+
+    if (errors.length > 0) {
+        res.render('./home/newProyect', { title: 'Editar proyecto', errors, proyects })
+    } else {
+        await Proyect.update({ name }, { where: { id: req.params.id } });
+        res.redirect('/');
+    }
+}
