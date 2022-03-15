@@ -26,7 +26,16 @@ exports.addProyect = async (req, res) => {
 }
 
 exports.showProyect = async (req, res) => {
-    const proyects = await Proyect.findAll();
-    const proyect = await Proyect.findOne({ where: { url: req.params.url } })
+    const proyectsPromisse = Proyect.findAll();
+    const proyectPromisse = Proyect.findOne({ where: { url: req.params.url } })
+    const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
+
     res.render('./home/proyect', { title: 'Proyecto', proyects, proyect })
+}
+
+exports.editProyect = async (req, res) => {
+    const proyectsPromisse = Proyect.findAll();
+    const proyectPromisse = Proyect.findOne({ where: { id: req.params.id } })
+    const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
+    res.render('./home/newProyect', { title: 'Editar proyecto', proyects, proyect })
 }

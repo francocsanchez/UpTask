@@ -1,5 +1,7 @@
 extends ../layout
 
+include ../mixins/formProyect
+
 block content
     .contenido-principal
         h1 #{title}
@@ -7,10 +9,4 @@ block content
         if errors 
             each error in errors 
                 .alerta.error= error.texto
-
-        form.agregar-proyecto(action="/newProyect" method="POST")
-            .campo 
-                label(for="name") Nombre proyecto: 
-                input(type="text" id="name" name="name" placeholder="Nombre del proyecto")
-            .campo-enviar 
-                input(type="submit" value="Agregar" class="boton") 
+        +formProyect(proyect)
