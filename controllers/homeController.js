@@ -54,3 +54,9 @@ exports.updateProyect = async (req, res) => {
         res.redirect('/');
     }
 }
+
+exports.deleteProyect = async (req, res, next) => {
+    const { urlProyect } = req.query;
+    await Proyect.destroy({ where: { url: urlProyect } });
+    res.status(200).send('Proyecto eliminado correctamente');
+}
