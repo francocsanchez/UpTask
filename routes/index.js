@@ -6,6 +6,7 @@ const router = express.Router();
 const validation = body('name').not().isEmpty().trim().escape();
 
 const homeController = require('../controllers/homeController');
+const taskController = require('../controllers/taskController');
 
 module.exports = function () {
     router.get('/', homeController.index)
@@ -17,6 +18,8 @@ module.exports = function () {
     router.get('/proyect/:id/edit', homeController.editProyect)
     router.post('/newProyect/:id', validation, homeController.updateProyect)
     router.delete('/proyect/:url', homeController.deleteProyect);
+
+    router.post('/proyects/:url', taskController.addTask);
 
     return router;
 }

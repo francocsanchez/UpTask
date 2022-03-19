@@ -5,6 +5,12 @@ block content
         h1 #{proyect.name}
 
         //TODO - Formulario de tareas
+        form.agregar-tarea(action=`/proyects/${proyect.url}` method="POST")
+            .campo
+                label(for="task") Tarea:
+                input.nombre-tarea(type="text" name="task" placeholder="Nombre de la tarea")  
+            .campo.enviar 
+                input.boton.nueva-tarea(type="submit" value="Agregar tarea")
 
         //TODO - Listado de pendientes
 
