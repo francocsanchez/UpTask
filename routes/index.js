@@ -20,6 +20,7 @@ module.exports = function () {
     router.delete('/proyect/:url', homeController.deleteProyect);
 
     router.post('/proyects/:url', taskController.addTask);
+    router.patch('/task/:id', taskController.updateTask);
 
     return router;
 }

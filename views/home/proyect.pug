@@ -19,7 +19,7 @@ block content
             ul
                 if tasks.length 
                     each task in tasks 
-                        li.tarea 
+                        li.tarea(data-task=task.id) 
                             p= task.task 
                             .acciones 
                                 if (task.status==1)
