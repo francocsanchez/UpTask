@@ -1,4 +1,5 @@
 const Proyect = require('../models/Proyect');
+const Task = require('../models/Task');
 
 exports.index = async (req, res) => {
     const proyects = await Proyect.findAll();
@@ -30,7 +31,9 @@ exports.showProyect = async (req, res) => {
     const proyectPromisse = Proyect.findOne({ where: { url: req.params.url } })
     const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
 
-    res.render('./home/proyect', { title: 'Proyecto', proyects, proyect })
+    const tasks = await Task.findAll({ where: { proyectId: proyect.id } });
+
+    res.render('./home/proyect', { title: 'Proyecto', proyects, proyect, tasks })
 }
 
 exports.editProyect = async (req, res) => {
