@@ -15,6 +15,20 @@ block content
         //TODO - Listado de pendientes
 
         //- pre=vardump(tasks)
+        .listado-pendientes
+            ul
+                if tasks.length 
+                    each task in tasks 
+                        li.tarea 
+                            p= task.task 
+                            .acciones 
+                                if (task.status==1)
+                                    i.far.fa-check-circle.completo 
+                                else 
+                                    i.far.fa-check-circle
+                                i.fas.fa-trash
+                else 
+                    p No hay tareas en este proyecto
 
         .contenedor-acciones
             a(href=`/proyect/${proyect.id}/edit` class="boton") Editar Proyecto
