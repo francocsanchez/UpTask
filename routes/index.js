@@ -5,21 +5,22 @@ const router = express.Router();
 
 const validation = body('name').not().isEmpty().trim().escape();
 
-const homeController = require('../controllers/homeController');
+const proyectController = require('../controllers/proyectController');
 const taskController = require('../controllers/taskController');
 
 module.exports = function () {
-    router.get('/', homeController.index)
+    router.get('/', proyectController.index)
 
-    //Rutas  de proyecto
-    router.get('/newProyect', homeController.newProyect)
-    router.post('/newProyect', validation, homeController.addProyect)
-    router.get('/proyects/:url', homeController.showProyect)
-    router.get('/proyect/:id/edit', homeController.editProyect)
-    router.post('/newProyect/:id', validation, homeController.updateProyect)
-    router.delete('/proyect/:url', homeController.deleteProyect);
+    //Rutas de proyecto
+    router.get('/proyect/add', proyectController.newProyect)
+    router.post('/proyect/add', validation, proyectController.addProyect)
+    router.get('/proyects/:url', proyectController.showProyect)
+    router.get('/proyect/:id/edit', proyectController.editProyect)
+    router.post('/proyect/add/:id', validation, proyectController.updateProyect)
+    router.delete('/proyect/:url', proyectController.deleteProyect);
 
-    router.post('/proyects/:url', taskController.addTask);
+    //Rutas de tareas
+    router.post('/task/:url', taskController.addTask);
     router.patch('/task/:id', taskController.updateTask);
     router.delete('/task/:id', taskController.deleteTask);
 
