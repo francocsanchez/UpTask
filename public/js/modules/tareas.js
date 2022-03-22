@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const tasks = document.querySelector('.listado-pendientes');
 
@@ -13,6 +14,47 @@ if (tasks) {
                 .then(function (response) {
                     response.status == 200 ? icono.classList.toggle('completo') : null
                 })
+        }
+
+        if (e.target.classList.contains('fa-trash')) {
+            const taskHTML = e.target.parentElement.parentElement;
+            const idTask = taskHTML.dataset.task;
+
+            Swal.fire({
+                title: 'Deseas eliminar esta tarea?',
+                text: "La tarea no se podra recuperar",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar',
+                cancelButtonText: 'No, Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = `${location.origin}/task/${idTask}`
+
+                    axios.delete(url, { params: { idTask } })
+                        .then(function (response) {
+
+                            if (response.status === 200) {
+                                taskHTML.parentElement.removeChild(taskHTML);
+                            }
+
+                            Swal.fire(
+                                'Eliminado!',
+                                response.data,
+                                'success'
+                            );
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Hubo un error',
+                                text: 'No se pudo eliminar la tarea'
+                            })
+                        })
+                }
+            })
         }
     })
 }

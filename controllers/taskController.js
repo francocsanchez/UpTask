@@ -9,9 +9,7 @@ exports.addTask = async (req, res, next) => {
 
     const result = await Task.create({ task, status, proyectId });
 
-    !result ? next() : null;
-
-    res.redirect(`/proyects/${req.params.url}`);
+    !result ? next() : res.redirect(`/proyects/${req.params.url}`);
 }
 
 exports.updateTask = async (req, res) => {
@@ -22,8 +20,13 @@ exports.updateTask = async (req, res) => {
 
     const result = await task.save();
 
-    !result ? next() : null;
+    !result ? next() : res.status(200).send('Actualizado');
+}
 
-    console.log(task.status);
-    res.status(200).send('Actualizado');
+exports.deleteTask = async (req, res) => {
+
+    const { id } = req.params;
+    const result = Task.destroy({ where: { id } })
+
+    !result ? next() : res.status(200).send('Tarea eliminada correctamente');
 }
