@@ -8,6 +8,7 @@ const validation = body('name').not().isEmpty().trim().escape();
 const proyectController = require('../controllers/proyectController');
 const taskController = require('../controllers/taskController');
 const userController = require('../controllers/userController');
+const fakerController = require('../controllers/fakerController');
 
 module.exports = function () {
     router.get('/', proyectController.index)
@@ -28,6 +29,9 @@ module.exports = function () {
     //Rutas de Usuario
     router.get('/crear-cuenta', userController.formLogin);
     router.post('/crear-cuenta', userController.crearCuenta);
+
+    //Faker
+    router.get('/faker',fakerController.faker);
 
     return router;
 }

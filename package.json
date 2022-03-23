@@ -37,6 +37,7 @@
     "@babel/core": "^7.17.7",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
+    "faker": "^5.5.3",
     "nodemon": "^2.0.15",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
