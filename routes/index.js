@@ -26,7 +26,8 @@ module.exports = function () {
     router.delete('/task/:id', taskController.deleteTask);
 
     //Rutas de Usuario
-    router.get('/crear-cuenta', userController.crearCuenta);
+    router.get('/crear-cuenta', userController.formLogin);
+    router.post('/crear-cuenta', userController.crearCuenta);
 
     return router;
 }
