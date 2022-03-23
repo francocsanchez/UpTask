@@ -7,6 +7,7 @@ const validation = body('name').not().isEmpty().trim().escape();
 
 const proyectController = require('../controllers/proyectController');
 const taskController = require('../controllers/taskController');
+const userController = require('../controllers/userController');
 
 module.exports = function () {
     router.get('/', proyectController.index)
@@ -23,6 +24,9 @@ module.exports = function () {
     router.post('/task/:url', taskController.addTask);
     router.patch('/task/:id', taskController.updateTask);
     router.delete('/task/:id', taskController.deleteTask);
+
+    //Rutas de Usuario
+    router.get('/crear-cuenta', userController.crearCuenta);
 
     return router;
 }

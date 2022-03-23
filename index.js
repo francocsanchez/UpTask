@@ -9,6 +9,7 @@ const db = require('./config/db');
 
 require('./models/Proyect');
 require('./models/Task');
+require('./models/User');
 
 db.sync()
     .then(() => console.log('Conectado al servidor'))
