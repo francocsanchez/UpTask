@@ -4,7 +4,7 @@ html(lang="en")
         include ../partials/head
     body.login
         .contenedor-formulario 
-            h1 Crear cuenta en UpTask 
+            h1 Iniciar sesión en UpTask
 
             if locals.mensajes
                 .alertas 
@@ -13,7 +13,7 @@ html(lang="en")
                             .alerta(class=`${categoria}`)
                                 p= error
 
-            form#formulario.caja.caja-login(method='POST' action='/crear-cuenta')
+            form#formulario.caja.caja-login(method='POST' action='/iniciar-sesion')
                 .campo 
                     label(for="email") Email: 
                     input(type="email" name="email" placeholder="Ingrese un email" value= email) 
@@ -23,4 +23,4 @@ html(lang="en")
                 .campo.enviar 
                     input.boton(type="submit" value="Crear cuenta")
                 .campo 
-                    a(href="/iniciar-sesion") Volver a iniciar sesión 
+                    a(href="/crear-cuenta") ¿ No tenes cuenta ? Crea una gratis

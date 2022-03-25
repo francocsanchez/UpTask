@@ -5,6 +5,10 @@ exports.formLogin = (req, res) => {
     res.render('user/crearCuenta', { title: "Crear cuenta" });
 }
 
+exports.iniciarSesion = (req, res) => {
+    res.render('user/iniciarSesion', { title: "Inicio de sesión" });
+}
+
 exports.crearCuenta = async (req, res) => {
     const { email, password } = req.body;
     try {
