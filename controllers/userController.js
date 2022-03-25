@@ -12,9 +12,11 @@ exports.crearCuenta = async (req, res) => {
         res.redirect('/inicar-sesion');
     } catch (error) {
         req.flash('error', error.errors.map(error => error.message));
-        res.render('user/crearCuenta', { 
-            title: "Crear cuenta", 
-            mensajes: req.flash()
+        res.render('user/crearCuenta', {
+            title: "Crear cuenta",
+            mensajes: req.flash(),
+            email,
+            password
         });
     }
 }
