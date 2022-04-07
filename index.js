@@ -6,6 +6,7 @@ const helpers = require('./helpers');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParse = require('cookie-parser');
+const passport = require('./config/passport');
 
 // Conexion DB - Generacion de Tablas
 const db = require('./config/db');
@@ -30,6 +31,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump
     res.locals.mensajes = req.flash();
