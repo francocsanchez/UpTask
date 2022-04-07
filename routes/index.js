@@ -32,6 +32,7 @@ module.exports = function () {
     router.post('/crear-cuenta', userController.crearCuenta);
     router.get('/iniciar-sesion', userController.iniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
+    router.get('/cerrar-sesion', authController.cerrarSesion);
 
     //Faker
     router.get('/faker', fakerController.faker);
