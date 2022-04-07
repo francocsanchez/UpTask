@@ -11,7 +11,7 @@ passport.use(
         },
         async (email, password, done) => {
             try {
-                const usuario = await User.find({
+                const usuario = await User.findOne({
                     where: { email: email }
                 });
 

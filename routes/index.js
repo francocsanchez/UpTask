@@ -9,6 +9,7 @@ const proyectController = require('../controllers/proyectController');
 const taskController = require('../controllers/taskController');
 const userController = require('../controllers/userController');
 const fakerController = require('../controllers/fakerController');
+const authController = require('../controllers/authController');
 
 module.exports = function () {
     router.get('/', proyectController.index)
@@ -30,9 +31,10 @@ module.exports = function () {
     router.get('/crear-cuenta', userController.formLogin);
     router.post('/crear-cuenta', userController.crearCuenta);
     router.get('/iniciar-sesion', userController.iniciarSesion);
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     //Faker
-    router.get('/faker',fakerController.faker);
+    router.get('/faker', fakerController.faker);
 
     return router;
 }

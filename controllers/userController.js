@@ -6,7 +6,8 @@ exports.formLogin = (req, res) => {
 }
 
 exports.iniciarSesion = (req, res) => {
-    res.render('user/iniciarSesion', { title: "Inicio de sesión" });
+    const { error } = res.locals.mensajes;
+    res.render('user/iniciarSesion', { title: "Inicio de sesión", error });
 }
 
 exports.crearCuenta = async (req, res) => {
