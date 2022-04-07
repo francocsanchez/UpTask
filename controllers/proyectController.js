@@ -2,17 +2,20 @@ const Proyect = require('../models/Proyect');
 const Task = require('../models/Task');
 
 exports.index = async (req, res) => {
-    const proyects = await Proyect.findAll();
+    const userId = res.locals.usuario.id;
+    const proyects = await Proyect.findAll({ where: { userId } });
     res.render('./home/index', { title: 'Home', proyects })
 }
 
 exports.newProyect = async (req, res) => {
-    const proyects = await Proyect.findAll();
+    const userId = res.locals.usuario.id;
+    const proyects = await Proyect.findAll({ where: { userId } });
     res.render('./home/newProyect', { title: 'Nuevo Proyecto', proyects })
 }
 
 exports.addProyect = async (req, res) => {
-    const proyects = await Proyect.findAll();
+    const userId = res.locals.usuario.id;
+    const proyects = await Proyect.findAll({ where: { userId } });
     const { name } = req.body
 
     let errors = [];
@@ -21,14 +24,16 @@ exports.addProyect = async (req, res) => {
     if (errors.length > 0) {
         res.render('./home/newProyect', { title: 'Nuevo Proyecto', errors, proyects })
     } else {
-        const proyect = await Proyect.create({ name });
+        const userId = res.locals.usuario.id;
+        const proyect = await Proyect.create({ name, userId });
         res.redirect('/');
     }
 }
 
 exports.showProyect = async (req, res) => {
-    const proyectsPromisse = Proyect.findAll();
-    const proyectPromisse = Proyect.findOne({ where: { url: req.params.url } })
+    const userId = res.locals.usuario.id;
+    const proyectsPromisse = Proyect.findAll({ where: { userId } });
+    const proyectPromisse = Proyect.findOne({ where: { url: req.params.url, userId } })
     const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
 
     const tasks = await Task.findAll({ where: { proyectId: proyect.id } });
@@ -37,14 +42,16 @@ exports.showProyect = async (req, res) => {
 }
 
 exports.editProyect = async (req, res) => {
-    const proyectsPromisse = Proyect.findAll();
-    const proyectPromisse = Proyect.findOne({ where: { id: req.params.id } })
+    const userId = res.locals.usuario.id;
+    const proyectsPromisse = Proyect.findAll({ where: { userId } });
+    const proyectPromisse = Proyect.findOne({ where: { id: req.params.id, userId } })
     const [proyects, proyect] = await Promise.all([proyectsPromisse, proyectPromisse])
     res.render('./home/newProyect', { title: 'Editar proyecto', proyects, proyect })
 }
 
 exports.updateProyect = async (req, res) => {
-    const proyects = await Proyect.findAll();
+    const userId = res.locals.usuario.id;
+    const proyects = await Proyect.findAll({ where: { userId } });
     const { name } = req.body
 
     let errors = [];
