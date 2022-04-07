@@ -12,20 +12,20 @@ const fakerController = require('../controllers/fakerController');
 const authController = require('../controllers/authController');
 
 module.exports = function () {
-    router.get('/', proyectController.index)
+    router.get('/', authController.usuarioAutenticado, proyectController.index)
 
     //Rutas de proyecto
-    router.get('/proyect/add', proyectController.newProyect)
-    router.post('/proyect/add', validation, proyectController.addProyect)
-    router.get('/proyects/:url', proyectController.showProyect)
-    router.get('/proyect/:id/edit', proyectController.editProyect)
-    router.post('/proyect/add/:id', validation, proyectController.updateProyect)
-    router.delete('/proyect/:url', proyectController.deleteProyect);
+    router.get('/proyect/add', authController.usuarioAutenticado, proyectController.newProyect)
+    router.post('/proyect/add', authController.usuarioAutenticado, validation, proyectController.addProyect)
+    router.get('/proyects/:url', authController.usuarioAutenticado, proyectController.showProyect)
+    router.get('/proyect/:id/edit', authController.usuarioAutenticado, proyectController.editProyect)
+    router.post('/proyect/add/:id', authController.usuarioAutenticado, validation, proyectController.updateProyect)
+    router.delete('/proyect/:url', authController.usuarioAutenticado, proyectController.deleteProyect);
 
     //Rutas de tareas
-    router.post('/task/:url', taskController.addTask);
-    router.patch('/task/:id', taskController.updateTask);
-    router.delete('/task/:id', taskController.deleteTask);
+    router.post('/task/:url', authController.usuarioAutenticado, taskController.addTask);
+    router.patch('/task/:id', authController.usuarioAutenticado, taskController.updateTask);
+    router.delete('/task/:id', authController.usuarioAutenticado, taskController.deleteTask);
 
     //Rutas de Usuario
     router.get('/crear-cuenta', userController.formLogin);
