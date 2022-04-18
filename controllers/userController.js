@@ -25,3 +25,7 @@ exports.crearCuenta = async (req, res) => {
         });
     }
 }
+
+exports.reestablecerPassword = (req,res) => {
+    res.render('user/reestablecer', {title: "Restablecer contraseña"});
+}

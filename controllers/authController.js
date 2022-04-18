@@ -1,4 +1,6 @@
-const passport = require('passport')
+const User = require('../models/User');
+const passport = require('passport');
+const crypto = require('crypto');
 
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/',
@@ -18,4 +20,25 @@ exports.cerrarSesion = (req, res) => {
     req.session.destroy(() => {
         res.redirect('/iniciar-sesion');
     })
+}
+
+exports.generarToken = async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+        req.flash('error', 'No existe la cuenta')
+        res.render('user/reestablecer', { title: "Restablecer contraseña", mensajes: req.flash() });
+    }
+
+    user.token = crypto.randomBytes(20).toString('hex');
+    user.tokenExp = Date.now() + 3600000;
+
+    await user.save();
+
+    const resetURL = `http://${req.headers.host}/reestablecer/${user.token}`;
+    console.log(resetURL);
+}
+
+exports.resetPassword = async (req, res) => {
+    res.json(req.params.token);
 }

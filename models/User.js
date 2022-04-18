@@ -33,6 +33,12 @@ const User = db.define('users', {
                 msg: 'El campo password no debe estar vacio'
             }
         }
+    },
+    token: {
+        type: Sequelize.STRING
+    },
+    tokenExp: {
+        type: Sequelize.DATE
     }
 }, {
     hooks: {

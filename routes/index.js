@@ -33,6 +33,9 @@ module.exports = function () {
     router.get('/iniciar-sesion', userController.iniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
     router.get('/cerrar-sesion', authController.cerrarSesion);
+    router.get('/reestablecer', userController.reestablecerPassword);
+    router.post('/reestablecer', authController.generarToken);
+    router.get('/reestablecer/:token', authController.resetPassword);
 
     //Faker
     router.get('/faker', fakerController.faker);
