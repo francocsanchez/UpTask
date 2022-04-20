@@ -39,7 +39,7 @@ exports.generarToken = async (req, res) => {
     console.log(resetURL);
 }
 
-exports.resetPassword = async (req, res) => {
+exports.validarToken = async (req, res) => {
     const user = await User.findOne({
         where: {
             token: req.params.token
