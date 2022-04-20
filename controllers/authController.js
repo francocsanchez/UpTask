@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const passport = require('passport');
+const { Op } = require("sequelize");
 const crypto = require('crypto');
+const bcrypt = require('bcrypt-nodejs')
 
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/',
@@ -46,10 +48,37 @@ exports.validarToken = async (req, res) => {
         }
     });
 
-    if(!user){
-        req.flash('error','Token no valido');
+    if (!user) {
+        req.flash('error', 'Token no valido');
         res.redirect('/reestablecer')
     }
 
-    res.render('user/resetPassword',{title: 'Restablecer contraseña'})
+    res.render('user/resetPassword', { title: 'Restablecer contraseña' })
+}
+
+exports.actualizarPassword = async (req, res) => {
+    const user = await User.findOne({
+        where: {
+            token: req.params.token,
+            tokenExp: {
+                [Op.gte]: Date.now(),
+            }
+        }
+    });
+
+    if (!user) {
+        req.flash('error', 'Token no valido');
+        res.redirect('/reestablecer')
+    }
+
+    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    user.token = null;
+    user.tokenExp = null;
+
+    await user.save();
+
+    req.flash('correcto', 'Tu contraseña fue actualziada correctamente')
+    res.redirect('/iniciar-sesion');
+
+    console.log(user);
 }
