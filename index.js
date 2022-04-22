@@ -43,3 +43,5 @@ app.use((req, res, next) => {
 app.use('/', routesIndex())
 
 app.listen(3000)
+
+//require('./handlers/email');
