@@ -14,10 +14,19 @@ var transport = nodemailer.createTransport({
     }
 });
 
-let info = transport.sendMail({
-    from: '"Sistem UpTask" <about@uptask.com>', // sender address
-    to: "bar@example.com, baz@example.com", // list of receivers
-    subject: "Reseteo de clave", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-});
+const generarHTML = (archivo, options = {}) => {
+    const html = pug.renderFile(`${__dirname}/../views/emails/${archivo}.pug`, options)
+    return juice(html);
+}
+
+exports.enviar = async (options) => {
+    let info = {
+        from: '"UpTask" <no-replay@uptask.com>', // sender address
+        to: options.user.email, // list of receivers
+        subject: options.subject, // Subject line
+        text: 'Hi!', // plain text body
+        html: generarHTML(options.archivo, options) // html body
+    };
+    const enviarEmail = util.promisify(transport.sendMail, transport)
+    return enviarEmail.call(transport, info)
+}
