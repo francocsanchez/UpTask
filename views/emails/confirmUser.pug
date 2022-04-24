@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        style 
+            include ./emails.css
+    body 
+        h2 Activar tu cuenta
+        p Hola, Solicitaste unirte a UpTask, activa tu cuenta.
+        a(href=`${confirURL}`) Has click aqui ! 
+        p Si no puedes acceder ingresa al siguiente enlace #{confirURL}

@@ -7,7 +7,7 @@ exports.faker = async (req, res) => {
     for (i = 1; i < 3; i++) {
         let randomEmail = faker.internet.email();
         let randomPassword = faker.name.findName();
-        let result = await User.create({ email: randomEmail, password: randomPassword })
+        let result = await User.create({ email: randomEmail, password: randomPassword, status: 1 })
     }
 
     for (p = 1; p < 3; p++) {

@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/User');
+const enviarEmail = require('../handlers/email')
 
 passport.use(
     new LocalStrategy(
@@ -18,6 +19,12 @@ passport.use(
                 if (!usuario.verificarPassword(password)) {
                     return done(null, false, {
                         message: 'El password es incorrecto'
+                    })
+                }
+
+                if (usuario.status == 0) {
+                    return done(null, false, {
+                        message: 'La cuenta no se encuentra activa, verifica tu correo'
                     })
                 }
 

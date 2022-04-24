@@ -34,6 +34,11 @@ const User = db.define('users', {
             }
         }
     },
+    status:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    }
+    ,
     token: {
         type: Sequelize.STRING
     },
